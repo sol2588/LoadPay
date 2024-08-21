@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export default function Logout() {
+export default function LogoutComponent() {
   const router = useRouter();
   const handleLogout = async () => {
     const response = await axios.post("/api/logout");
