@@ -43,3 +43,6 @@ firestore.rules
 
 # prettier
 .prettierrc
+
+# generate public & private key
+generateKey.ts
