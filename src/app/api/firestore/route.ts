@@ -3,7 +3,7 @@ import { db } from "@/utills/database";
 
 export async function GET() {
   try {
-    const dbQuery = await getDocs(collection(db, "temp"));
+    const dbQuery = await getDocs(collection(db, "users"));
     const data = dbQuery.docs.map(doc => doc.data());
     return new Response(JSON.stringify(data), {
       status: 200,
