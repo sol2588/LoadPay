@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export function POST(req: NextRequest) {
   if (req.method == "POST") {
