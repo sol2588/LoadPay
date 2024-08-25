@@ -7,6 +7,10 @@ import "./globals.css";
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   useEffect(() => {
     async function tokenRefresher() {
+      const isLogin = localStorage.getItem("loginState");
+      if (isLogin == "false") {
+        return;
+      }
       try {
         const response = await axios.get("/api/auth");
         const { accessToken } = response.data;
@@ -15,6 +19,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         console.log(err);
       }
     }
+
     const clearId = setInterval(tokenRefresher, 3600000 - 10000);
     tokenRefresher();
 
