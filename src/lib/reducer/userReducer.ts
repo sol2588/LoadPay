@@ -1,14 +1,18 @@
-const initialState = {
-  user: {
-    isLoggedIn: false,
-    userName: "",
-    userId: "",
-    accessToken: "",
-  },
+interface UserProps {
+  isLoggedIn: boolean;
+  userName: string | null;
+  userId: string | null;
+  accessToken: string | null;
+}
+const initialState: UserProps = {
+  isLoggedIn: false,
+  userName: "",
+  userId: "",
+  accessToken: "",
 };
 
 // reducer
-const userReducer = (state = initialState, action: any) => {
+const userReducer = (state = initialState, action: any): UserProps => {
   switch (action.type) {
     case "LOGIN_SUCCESS":
       return {
@@ -21,7 +25,9 @@ const userReducer = (state = initialState, action: any) => {
       return {
         ...state,
         isLoggedIn: false,
-        user: null,
+        userName: null,
+        userId: null,
+        accessToken: null,
       };
     default:
       return state;

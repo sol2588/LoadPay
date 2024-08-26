@@ -1,8 +1,9 @@
 "use client";
 import { FormEvent, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loginAction, logoutAction } from "@/lib/actions/userActions";
+import { setLoginSuccess } from "@/lib/actions/userActions";
 import { useRouter } from "next/navigation";
+import { RootState } from "@/lib/reducer";
 import styles from "./LoginComponent.module.css";
 import axios from "axios";
 
@@ -15,7 +16,7 @@ interface ErrorType {
 }
 
 export default function LoginComponent() {
-  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
   const dispatch = useDispatch();
   const router = useRouter();
   const [message, setMessage] = useState("");
@@ -27,8 +28,7 @@ export default function LoginComponent() {
     try {
       const response = await axios.post("/api/login", { userId, pw });
       if (response.status == 200) {
-        // redux 도입
-        dispatch(loginAction({ type: "LOGIN_SUCCESS", payload: { id: userId, token: response.data.token } }));
+        dispatch(setLoginSuccess({ id: userId, token: response.data.token }));
 
         // access token은 localstorage에 저장하고 refresh는 HttpOnly로 클라이언트 JS로는 접근하여 확인 불가
         // session Storage - cookie 탭에 담겨있고 클라이언트에서 request보낼때 자동으로 http의 모든 내용을 포함함
@@ -43,7 +43,6 @@ export default function LoginComponent() {
       setMessage(err.response?.data?.message || "Unknown error");
     }
   };
-  console.log(isLoggedIn);
 
   return (
     <section className={styles.loginContainer}>

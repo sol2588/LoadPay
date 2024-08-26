@@ -1,8 +1,8 @@
-export const loginAction = (userData: any) => ({
+export const setLoginSuccess = (userData: any) => ({
   type: "LOGIN_SUCCESS",
-  payload: userData,
+  payload: { id: userData.id, token: userData.token },
 });
 
-export const logoutAction = () => ({
-  type: "LOGOUT",
+export const setLogoutSuccess = () => ({
+  type: "LOGOUT_SUCCESS",
 });
