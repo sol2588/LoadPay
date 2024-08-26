@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
-import axios from "axios";
 import "./globals.css";
+import axios from "axios";
+import { useEffect } from "react";
+import { Provider } from "react-redux";
+import store from "@/lib/store/store";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   useEffect(() => {
@@ -26,8 +28,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return () => clearInterval(clearId);
   }, []);
   return (
-    <html lang="ko">
-      <body>{children}</body>
-    </html>
+    <Provider store={store}>
+      <html lang="ko">
+        <body>{children}</body>
+      </html>
+    </Provider>
   );
 }
